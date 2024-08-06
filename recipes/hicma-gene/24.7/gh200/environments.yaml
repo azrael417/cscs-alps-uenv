@@ -1,0 +1,44 @@
+gcc-env:
+  compiler:
+      - toolchain: gcc
+        spec: gcc
+  mpi:
+      spec: cray-mpich@8.1.30
+      gpu: cuda
+  unify: true
+  specs:
+  - aws-ofi-nccl@master
+  - cmake
+  - cuda@12.4
+  - fftw
+  - fmt
+  - hdf5+hl
+  - libtree
+  - meson
+  - nccl
+  - nccl-tests
+  - ninja
+  - openblas threads=openmp
+  - gsl%gcc
+  - python@3.10
+  - py-setuptools%gcc
+  - py-llvmlite ^llvm ~cuda
+  - py-numpy%gcc
+  - py-pytz%gcc
+  - py-python-dateutil%gcc
+  - py-dateutils%gcc
+  - py-six%gcc
+  - py-pandas%gcc
+  - py-mpi4py%gcc
+  - py-scikit-learn%gcc
+  - py-pip%gcc
+  variants:
+  - +mpi
+  - +cuda
+  - cuda_arch=90
+  views:
+    default:
+      link: roots
+      uenv:
+        prefix_paths:
+          LD_LIBRARY_PATH: [lib, lib64]
